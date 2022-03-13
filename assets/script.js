@@ -7,79 +7,69 @@ var passwordCharacters = {
     symbol: "!@#$%^&*()_+~\`|}{[]:;?<>,./-="
 }
 var passwordLength = "";
-let validChars = "";
+let validCharacters = "";
 var generatedPassword = "";
 
 var getPasswordLength = function() {
-    while (passwordLength === "" || passwordLength === null) {
-        passwordLength = prompt("How many characters do you need for your password?");
+        passwordLength = prompt("How many characters do you need for your password? Must be between 8 and 128 characters.");
 
         passwordLength = parseInt(passwordLength);
-    }
-    console.log("Your password length is " + passwordLength);
-    return passwordLength;
+
+        if (passwordLength >= 8 && passwordLength <= 128) {
+            console.log("Your password length is " + passwordLength);
+        return passwordLength;
+        }
+        else {
+            window.alert("Select a value between 8 and 128");
+            return getPasswordLength();
+        }
 };
 getPasswordLength();
-
-    function upperCase() {
-        return passwordCharacters.upperCase[Math.floor(Math.random() * passwordCharacters.upperCase.length)];
-    };
-    function lowerCase () {
-        return passwordCharacters.lowerCase[Math.floor(Math.random() * passwordCharacters.lowerCase.length)];
-    };
-    function number() {
-        return passwordCharacters.number[Math.floor(Math.random() * passwordCharacters.number.length)];
-    };
-    function symbol() {
-        return passwordCharacters.symbol[Math.floor(Math.random() * passwordCharacters.symbol.length)];
-    };
 
 //ask if using upper case characters
 var getCharacterSet = function () {
 
-promptUpperCase = window.prompt ('Would you like to use upper case letters for your password? Type "Y" for "yes" or "N" for "no"');
+var promptUpperCase = window.prompt ('Would you like to use upper case letters for your password? Type "Y" for "yes" or "N" for "no"');
 
-promptUpperCase = promptUpperCase.toLowerCase();
+console.log(promptUpperCase);
 
-if (promptUpperCase === "y") {
-    validChars = passwordCharacters.upperCase + validChars;
+if (promptUpperCase === "Y" || promptUpperCase === "y") {
+    validCharacters += passwordCharacters.upperCase;
 }
-promptLowerCase = window.prompt ('Would you like to use lower case letters for your password? Type "Y" for "yes" or "N" for "no"');
+var promptLowerCase = window.prompt ('Would you like to use lower case letters for your password? Type "Y" for "yes" or "N" for "no"');
 
-promptLowerCase = promptLowerCase.toLowerCase();
+console.log(promptLowerCase);
 
-if (promptLowerCase === "y") {
-    validChars = passwordCharacters.lowerCase + validChars;
+if (promptLowerCase === "y" || promptLowerCase === "Y") {
+    validCharacters += passwordCharacters.lowerCase;
 }
-promptNumber = window.prompt ('Would you like to use numbers for your password? Type "Y" for "yes" or "N" for "no"');
+var promptNumber = window.prompt ('Would you like to use numbers for your password? Type "Y" for "yes" or "N" for "no"');
 
-promptNumber = promptNumber.toLowerCase();
+console.log(promptNumber);
 
-if (promptNumber === "y") {
-    validChars = passwordCharacters.number + validChars;
+if (promptNumber === "y" || promptNumber === "Y") {
+    validCharacters += passwordCharacters.number;
 }
-promptSymbol = window.prompt ('Would you like to use special characters for your password? Type "Y" for "yes" or "N" for "no"');
+var promptSymbol = window.prompt ('Would you like to use special characters for your password? Type "Y" for "yes" or "N" for "no"');
 
-promptSymbol = promptSymbol.toLowerCase();
+console.log(promptSymbol);
+var prompts = [promptUpperCase, promptLowerCase, promptNumber, promptSymbol];
+console.log(prompts);
 
-if (promptSymbol === "y") {
-    validChars = passwordCharacters.symbol + validChars;
+if (promptSymbol === "y" || promptSymbol === "Y") {
+    validCharacters += passwordCharacters.symbol;
 }
-else {
-    window.alert("You need to select at least 1 option. Please try again.");
-    return getCharacterSet();
-}
+
 };
 getCharacterSet();
 
-
 for (var i = 0; i < passwordLength; i++) {
-    var index = Math.floor(Math.random() * validChars.length);
-    generatedPassword += validChars[index];
+    var index = Math.floor(Math.random() * validCharacters.length);
+    generatedPassword += validCharacters[index];
 }
 
 password = generatedPassword;
-console.log(password);
+console.log(generatedPassword);
 
 //generate password when button is clicked based on length and character set parameters
 
@@ -88,7 +78,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = generatePassword() 
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
