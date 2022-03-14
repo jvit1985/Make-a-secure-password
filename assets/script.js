@@ -10,7 +10,12 @@ var passwordLength = "";
 let validCharacters = "";
 var generatedPassword = "";
 
-var getPasswordLength = function() {
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
+
+// Write password to the #password input
+function writePassword() {
+    var getPasswordLength = function() {
         passwordLength = prompt("How many characters do you need for your password? Must be between 8 and 128 characters.");
 
         passwordLength = parseInt(passwordLength);
@@ -23,8 +28,8 @@ var getPasswordLength = function() {
             window.alert("Select a value between 8 and 128");
             return getPasswordLength();
         }
-};
-getPasswordLength();
+    };
+    getPasswordLength();
 
 //ask if using upper case characters
 var getCharacterSet = function () {
@@ -63,22 +68,15 @@ if (promptSymbol === "y" || promptSymbol === "Y") {
 };
 getCharacterSet();
 
-for (var i = 0; i < passwordLength; i++) {
-    var index = Math.floor(Math.random() * validCharacters.length);
-    generatedPassword += validCharacters[index];
-}
-
-password = generatedPassword;
-console.log(generatedPassword);
-
-//generate password when button is clicked based on length and character set parameters
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword() 
+  var generatePassword = function() {
+    for (var i = 0; i < passwordLength; i++) {
+        var index = Math.floor(Math.random() * validCharacters.length);
+        generatedPassword += validCharacters[index];
+    }
+    
+    password = generatedPassword;
+  };
+  generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
