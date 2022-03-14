@@ -6,7 +6,7 @@ Characters used for password are based on user inputs from prompts.
 
 Prompts generate once "Generate Password" button is clicked by user.
 
-Deployed page at 
+Deployed page at https://jvit1985.github.io/Make-a-secure-password/
 
 Screenshot
 
